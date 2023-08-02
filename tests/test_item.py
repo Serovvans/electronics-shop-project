@@ -10,8 +10,6 @@ def test_total_price(item_smartphone ,item_laptop):
 
 def test_apply_discount(item_smartphone, item_laptop):
     """Тестирует изменение и применение скидки на товар"""
-    previous = Item.pay_rate
-
     Item.pay_rate = 0.8
     item_smartphone.apply_discount()
 
