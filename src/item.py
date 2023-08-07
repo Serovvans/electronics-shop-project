@@ -68,3 +68,9 @@ class Item:
             return int(float(value))
         except ValueError:
             print("Некорректное значение")
+
+    def __repr__(self):
+        return f"Item('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return self.__name
