@@ -10,11 +10,16 @@ def test_total_price(item_smartphone, item_laptop):
 
 def test_apply_discount(item_smartphone, item_laptop):
     """Тестирует изменение и применение скидки на товар"""
+    last = item_smartphone.price
+    last1 = item_laptop.price
     Item.pay_rate = 0.8
     item_smartphone.apply_discount()
 
     assert item_smartphone.price == 8000.0, "Неверно применена скидка"
     assert item_laptop.price == 20000, "Неверно применена скидка"
+
+    item_smartphone.price = last
+    item_laptop = last1
 
 
 def test_list_of_items(item_smartphone, item_laptop):
@@ -23,6 +28,7 @@ def test_list_of_items(item_smartphone, item_laptop):
 
 
 def test_name(item_smartphone):
+    """Тестирует геттер и сеттер атрибута name"""
     assert item_smartphone.name == "Смартфон"
     item_smartphone.name = "SuperСмартфон"
     assert item_smartphone.name == "SuperСмарт"
@@ -30,6 +36,7 @@ def test_name(item_smartphone):
 
 
 def test_instantiate_from_csv():
+    """Тестирует чтение данных из csv файла"""
     Item.instantiate_from_csv()  # создание объектов из данных файла
     assert len(Item.all) == 5
 
@@ -38,6 +45,17 @@ def test_instantiate_from_csv():
 
 
 def test_string_to_number():
+    """Тестирует классовый метод перевода"""
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+
+
+def test_repr(item_smartphone):
+    """Тестирует представление объекта для отладчика"""
+    assert repr(item_smartphone) == "Item('Смартфон', 10000, 20)"
+
+
+def test_str(item_smartphone):
+    """Тестирует строковое представление объекта"""
+    assert str(item_smartphone) == 'Смартфон'
