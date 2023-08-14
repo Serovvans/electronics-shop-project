@@ -64,6 +64,9 @@ class Item:
 
     @staticmethod
     def string_to_number(value: str) -> int:
+        """
+        Перевод из строки в число типа int
+        """
         try:
             return int(float(value))
         except ValueError:
@@ -74,3 +77,8 @@ class Item:
 
     def __str__(self):
         return self.__name
+
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+        raise ValueError("Оба объекта должны быть подклассом Item")

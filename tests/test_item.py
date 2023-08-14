@@ -59,3 +59,7 @@ def test_repr(item_smartphone):
 def test_str(item_smartphone):
     """Тестирует строковое представление объекта"""
     assert str(item_smartphone) == 'Смартфон'
+
+
+def test_add(item_smartphone, item_laptop):
+    assert item_smartphone + item_laptop == 25
