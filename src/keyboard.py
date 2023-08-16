@@ -17,8 +17,10 @@ class MixinChange:
         """Метод смены языка раскладки"""
         if self.__language == "RU":
             self.__language = "EN"
-        else:
+        elif self.__language == "EN":
             self.__language = "RU"
+        else:
+            raise AttributeError("Неверная раскладка клавиатуры. Ожидается RU/EN")
         return self
 
 
