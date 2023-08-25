@@ -1,6 +1,7 @@
 import os
 
 from csv import DictReader
+from src.exceptions import InstantiateCSVError
 
 
 class Item:
@@ -54,13 +55,18 @@ class Item:
         """
         Создание экземпляра класса из файла с данными
         """
-        file: str = os.path.join(".", "src", "items.csv")
+        file: str = os.path.join("..", "src", "items.csv")
         cls.all = []
-        with open(file, "r") as f:
-            data = DictReader(f)
+        try:
+            with open(file, "r") as f:
+                data = DictReader(f)
 
-            for item in data:
-                cls(item["name"], item["price"], item["quantity"])
+                for item in data:
+                    cls(item["name"], item["price"], item["quantity"])
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл items.csv")
+        except KeyError:
+            raise InstantiateCSVError("Файл item.csv поврежден")
 
     @staticmethod
     def string_to_number(value: str) -> int:
